@@ -9,15 +9,9 @@ class ImportXMLOperator(bpy.types.Operator):
     filepath: bpy.props.StringProperty(subtype="FILE_PATH")
     
     def execute(self, context):
-        try:
-            color_scheme, objects_data = import_xml(self.filepath)
-            apply_data_to_objects(color_scheme, objects_data)
-            self.report({'INFO'}, "XML data successfully applied!")
-            
-        except Exception as e:
-            self.report({'ERROR'}, f"Failed to import XML: {e}")
-            return {'CANCELLED'}
-        
+        color_scheme, objects_data = import_xml(self.filepath)
+        apply_data_to_objects(color_scheme, objects_data)
+        self.report({'INFO'}, "XML data successfully applied!")
         return {'FINISHED'}
 
     def invoke(self, context, event):
